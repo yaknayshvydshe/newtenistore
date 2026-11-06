@@ -4,31 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>New Tenis Store | Tênis e calçados com estilo e conforto</title>
-  <meta name="description" content="Tênis casuais, esportivos e retrô com variedade de cores e tamanhos. Atendimento pelo WhatsApp e entrega com rastreio.">
+  <meta name="description" content="Tênis casuais, esportivos e retrô com variedade de cores e tamanhos. Atendimento direto pelo WhatsApp e envio com rastreio.">
   <meta name="theme-color" content="#111827">
-  <link rel="canonical" href="https://newtenistore.com.br/">
-
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="New Tenis Store">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:title" content="New Tenis Store | Tênis e calçados com estilo e conforto">
-  <meta property="og:description" content="Tênis casuais, esportivos e retrô com variedade de cores e tamanhos. Atendimento pelo WhatsApp e entrega com rastreio.">
-  <meta property="og:image" content="https://raw.githubusercontent.com/yaknayshvydshe/newtenistore/1b7225200b58c3fbf9156d525021e02c9473f044/app/img/files/logo.png">
-  <meta property="og:url" content="https://newtenistore.com.br/">
-
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="New Tenis Store | Tênis e calçados com estilo e conforto">
-  <meta name="twitter:description" content="Tênis casuais, esportivos e retrô com variedade de cores e tamanhos. Atendimento pelo WhatsApp e entrega com rastreio.">
-  <meta name="twitter:image" content="https://raw.githubusercontent.com/yaknayshvydshe/newtenistore/1b7225200b58c3fbf9156d525021e02c9473f044/app/img/files/logo.png">
-
-  <link rel="preconnect" href="https://raw.githubusercontent.com">
+  <meta property="og:description" content="Tênis casuais, esportivos e retrô com variedade de cores e tamanhos. Atendimento direto pelo WhatsApp e envio com rastreio.">
+  <meta property="og:image" content="./app/img/logo.webp">
+  <link rel="icon" href="./app/img/favicon.webp" type="image/webp">
   <link rel="stylesheet" href="./app/css/styles.css">
 </head>
 <body>
+  <a class="skip-link" href="#catalogo">Pular para o catálogo</a>
+
   <header class="site-header">
-    <div class="container site-header__inner">
-      <a class="logo" href="./index.html" aria-label="New Tenis Store — página inicial">
-        <img src="https://raw.githubusercontent.com/yaknayshvydshe/newtenistore/1b7225200b58c3fbf9156d525021e02c9473f044/app/img/files/logo.png" alt="New Tenis Store" width="40" height="40">
+    <div class="container header__inner">
+      <a class="brand" href="./index.html" aria-label="New Tenis Store, página inicial">
+        <img src="./app/img/logo.webp" alt="" width="40" height="40">
         <span>New Tenis Store</span>
       </a>
 
@@ -38,44 +31,78 @@
         <a href="#contato">Contato</a>
       </nav>
 
-      <a class="btn btn--whatsapp" href="https://wa.me/5545998048535" target="_blank" rel="noopener noreferrer">Falar no WhatsApp</a>
+      <a class="btn btn--whatsapp header__cta" href="https://wa.me/5545998048535" target="_blank" rel="noopener noreferrer">WhatsApp</a>
     </div>
   </header>
 
   <main>
     <section class="hero">
-      <div class="container">
-        <p class="hero__eyebrow">Calçados para todos os estilos</p>
+      <div class="container hero__inner">
+        <p class="eyebrow">Calçados para todos os estilos</p>
         <h1 class="hero__title">Tênis e calçados com estilo, conforto e preço justo.</h1>
-        <p class="hero__subtitle">Modelos casuais, esportivos e retrô, com variedade de cores e tamanhos. Atendimento direto pelo WhatsApp.</p>
+        <p class="hero__lead">Modelos casuais, esportivos e retrô, com variedade de cores e tamanhos. Atendimento direto pelo WhatsApp e envio com rastreio.</p>
         <div class="hero__actions">
-          <a class="btn btn--primary" href="#catalogo">Ver catálogo</a>
+          <a class="btn btn--gold" href="#catalogo">Ver catálogo</a>
           <a class="btn btn--whatsapp" href="https://wa.me/5545998048535" target="_blank" rel="noopener noreferrer">Falar no WhatsApp</a>
         </div>
+        <ul class="hero__facts" aria-label="Informações da loja">
+          <li>Atendimento direto</li>
+          <li>Envio com rastreio</li>
+          <li>Troca em até 7 dias</li>
+        </ul>
       </div>
     </section>
 
     <section class="catalog" id="catalogo" aria-labelledby="catalogTitle">
       <div class="container">
-        <div class="catalog__header">
-          <h2 id="catalogTitle">Catálogo</h2>
-          <p class="product-count" id="count" aria-live="polite"></p>
+        <div class="section-head">
+          <div>
+            <p class="eyebrow eyebrow--dark">Catálogo</p>
+            <h2 id="catalogTitle">Peças disponíveis</h2>
+          </div>
+          <p class="count" id="count" aria-live="polite">Carregando catálogo…</p>
         </div>
 
-        <div class="filters" id="filters" aria-label="Filtrar produtos"></div>
+        <div class="toolbar">
+          <div class="search">
+            <label class="search__label" for="search">Buscar no catálogo</label>
+            <input id="search" type="search" placeholder="Referência, marca ou tipo" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="chips" id="filters" role="group" aria-label="Filtrar catálogo">
+            <button class="chip is-active" type="button" data-filter="all" aria-pressed="true">Todos</button>
+            <button class="chip" type="button" data-filter="featured" aria-pressed="false">Destaques</button>
+          </div>
+        </div>
 
-        <ul class="product-grid" id="grid"></ul>
+        <p class="catalog__note">Toque em uma peça para ver os detalhes e falar com a loja.</p>
+        <noscript><p class="catalog__note">O catálogo precisa de JavaScript. Você também pode falar com a loja pelo WhatsApp.</p></noscript>
 
-        <button class="load-more" id="loadMore" type="button">Carregar mais</button>
+        <p class="catalog__error" id="catalogError" hidden>Não foi possível carregar o catálogo. Verifique se o arquivo <code>app/js/catalog.js</code> existe e recarregue a página.</p>
+
+        <ul class="grid" id="grid" aria-label="Produtos do catálogo"></ul>
+
+        <div class="empty" id="empty" hidden>
+          <p class="empty__title">Nenhuma peça encontrada.</p>
+          <p class="empty__text" id="emptyText">Tente outra referência, marca ou tipo.</p>
+          <button class="btn btn--ghost" id="emptyClear" type="button">Limpar busca</button>
+        </div>
+
+        <div class="catalog__more">
+          <button class="btn btn--dark" id="loadMore" type="button" hidden>Carregar mais</button>
+        </div>
       </div>
     </section>
 
     <section class="size-guide" id="tamanhos" aria-labelledby="sizeGuideTitle">
-      <div class="container">
-        <h2 id="sizeGuideTitle">Guia de tamanhos</h2>
-        <p>Meça o pé no fim do dia, com a meia que costuma usar, e some de 0,5 a 1 cm de folga. As medidas são aproximadas e podem variar conforme o modelo. Em caso de dúvida, fale com a loja pelo WhatsApp.</p>
+      <div class="container size-guide__inner">
+        <div class="size-guide__intro">
+          <p class="eyebrow eyebrow--dark">Guia de tamanhos</p>
+          <h2 id="sizeGuideTitle">Encontre a numeração certa</h2>
+          <p>Meça o pé no fim do dia, com a meia que costuma usar, e some de 0,5 a 1 cm de folga. As medidas são aproximadas e podem variar conforme o modelo.</p>
+          <a class="text-link" href="https://wa.me/5545998048535" target="_blank" rel="noopener noreferrer">Falar com a loja sobre tamanhos →</a>
+        </div>
 
-        <div class="size-guide__grid">
+        <div class="size-grid" aria-label="Tamanhos e medidas aproximadas">
           <div><strong>34</strong><span>22,5 cm</span></div>
           <div><strong>35</strong><span>23 cm</span></div>
           <div><strong>36</strong><span>23,5 cm</span></div>
@@ -93,42 +120,58 @@
   </main>
 
   <footer class="site-footer" id="contato">
-    <div class="container">
-      <p class="site-footer__title">New Tenis Store</p>
-      <p>Tênis e calçados com estilo, conforto e preço justo.</p>
-      <div class="footer-links">
-        <a href="https://wa.me/5545998048535" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-        <a href="https://www.instagram.com/new.tenis.store" target="_blank" rel="noopener noreferrer">Instagram</a>
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <p class="footer__name">New Tenis Store</p>
+        <p class="footer__tagline">Tênis e calçados com estilo, conforto e preço justo.</p>
+      </div>
+
+      <nav class="footer__nav" aria-label="Links do rodapé">
         <a href="#catalogo">Catálogo</a>
         <a href="#tamanhos">Guia de tamanhos</a>
+        <a href="https://www.instagram.com/new.tenis.store" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="https://wa.me/5545998048535" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </nav>
+
+      <div class="footer__contact">
+        <p>Atendimento pelo WhatsApp</p>
+        <a href="https://wa.me/5545998048535" target="_blank" rel="noopener noreferrer">+55 45 99804-8535</a>
       </div>
-      <p class="site-footer__copy">© 2026 New Tenis Store. Todos os direitos reservados.</p>
+    </div>
+
+    <div class="container footer__bottom">
+      <p>© 2026 New Tenis Store. Todos os direitos reservados.</p>
+      <p>Feito para atendimento direto.</p>
     </div>
   </footer>
 
-  <dialog class="product-modal" id="productModal" aria-labelledby="modalTitle">
-    <button class="product-modal__close" id="modalClose" type="button" aria-label="Fechar">×</button>
-    <button class="product-modal__nav product-modal__nav--prev" id="modalPrev" type="button" aria-label="Produto anterior">‹</button>
+  <dialog class="modal" id="productModal" aria-labelledby="modalTitle">
+    <button class="modal__close" id="modalClose" type="button" aria-label="Fechar detalhes">×</button>
+    <button class="modal__nav modal__nav--prev" id="modalPrev" type="button" aria-label="Produto anterior">←</button>
 
-    <div class="product-modal__figure">
-      <img class="product-modal__image" id="modalImg" src="" alt="" width="800" height="800">
-      <div class="product-modal__info">
-        <h2 class="product-modal__title" id="modalTitle"></h2>
-        <p class="product-modal__price" id="modalPrice"></p>
-        <p class="product-modal__meta" id="modalMeta"></p>
-        <p class="product-modal__desc" id="modalDesc"></p>
-        <p class="product-modal__counter" id="modalCounter" aria-live="polite"></p>
-        <div class="product-modal__actions">
-          <a class="btn btn--whatsapp" id="modalWhatsApp" href="#" target="_blank" rel="noopener noreferrer">Tenho interesse</a>
-          <button class="btn btn--ghost" id="modalTag" type="button" aria-pressed="false">Ver etiqueta</button>
+    <div class="modal__surface">
+      <div class="modal__media">
+        <img id="modalImg" alt="" width="900" height="1200" decoding="async">
+      </div>
+
+      <div class="modal__body">
+        <p class="modal__ref" id="modalRef"></p>
+        <h2 class="modal__title" id="modalTitle"></h2>
+        <p class="modal__price" id="modalPrice"></p>
+        <p class="modal__meta" id="modalMeta"></p>
+        <p class="modal__desc" id="modalDesc"></p>
+        <ul class="modal__sizes" id="modalSizes" aria-label="Tamanhos disponíveis"></ul>
+        <p class="modal__counter" id="modalCounter" aria-live="polite"></p>
+        <div class="modal__actions">
+          <a class="btn btn--whatsapp" id="modalWhatsApp" href="https://wa.me/5545998048535" target="_blank" rel="noopener noreferrer">Tenho interesse</a>
         </div>
       </div>
     </div>
 
-    <button class="product-modal__nav product-modal__nav--next" id="modalNext" type="button" aria-label="Próximo produto">›</button>
+    <button class="modal__nav modal__nav--next" id="modalNext" type="button" aria-label="Próximo produto">→</button>
   </dialog>
-  <script src="./app/js/app.js"></script>
-  <script src="./app/js/data.js"></script>
-  <script src="./app/js/script.js" defer></script>
+
+  <script src="./app/js/catalog.js" defer></script>
+  <script src="./app/js/app.js" defer></script>
 </body>
 </html>
