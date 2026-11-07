@@ -127,7 +127,7 @@
       "nike-air-force-branco-34-35-36-37-38-39-42-129'90.webp",
       "adidas-samba-branco-azul-36-149'90.webp",
       "vans-oldskool-preto-branco-34-35-36-38-41-42-109'90.webp",
-      "converse-allstar-preto-36-37-38-39-41-42-109'90.webp",
+      "nike-dunk-low-branco-34-139'90.webp",
       "newbalance-casual-branco-36-37-149'90.webp",
       "veja-v023-branco-preto-35-36-37-129'90.webp"
     ]

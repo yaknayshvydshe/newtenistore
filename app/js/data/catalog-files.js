@@ -27,7 +27,6 @@ window.NTS.catalogFiles = [
   "converse-allstar-danoninho-35-36-37-38-109'90.webp",
   "converse-allstar-nozes-34-35-39-109'90.webp",
   "converse-allstar-preto-36-37-38-39-41-42-109'90.webp",
-  "converse-allstar-preto-36-99'90.webp",
   "d'matias-slipon-preto-36-79'90.webp",
   "fila-running-pink-34-99'90.webp",
   "futurewear-tad4-champagne-offwhite-35-36-37-38-149'90.webp",
