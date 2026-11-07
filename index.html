@@ -66,7 +66,7 @@
         <div class="toolbar">
           <div class="search">
             <label class="search__label" for="search">Buscar no catálogo</label>
-            <input id="search" type="search" placeholder="Referência, marca ou tipo" autocomplete="off" spellcheck="false">
+            <input id="search" type="search" placeholder="Marca, modelo, cor ou tamanho" autocomplete="off" spellcheck="false">
           </div>
           <div class="chips" id="filters" role="group" aria-label="Filtrar catálogo">
             <button class="chip is-active" type="button" data-filter="all" aria-pressed="true">Todos</button>
@@ -77,13 +77,13 @@
         <p class="catalog__note">Toque em uma peça para ver os detalhes e falar com a loja.</p>
         <noscript><p class="catalog__note">O catálogo precisa de JavaScript. Você também pode falar com a loja pelo WhatsApp.</p></noscript>
 
-        <p class="catalog__error" id="catalogError" hidden>Não foi possível carregar o catálogo. Verifique se o arquivo <code>app/js/catalog.js</code> existe e recarregue a página.</p>
+        <p class="catalog__error" id="catalogError" hidden>Não foi possível carregar o catálogo. Recarregue a página ou fale com a loja pelo WhatsApp.</p>
 
         <ul class="grid" id="grid" aria-label="Produtos do catálogo"></ul>
 
         <div class="empty" id="empty" hidden>
           <p class="empty__title">Nenhuma peça encontrada.</p>
-          <p class="empty__text" id="emptyText">Tente outra referência, marca ou tipo.</p>
+          <p class="empty__text" id="emptyText">Tente outra marca, modelo, cor ou tamanho.</p>
           <button class="btn btn--ghost" id="emptyClear" type="button">Limpar busca</button>
         </div>
 
@@ -155,11 +155,11 @@
       </div>
 
       <div class="modal__body">
-        <p class="modal__ref" id="modalRef"></p>
         <h2 class="modal__title" id="modalTitle"></h2>
         <p class="modal__price" id="modalPrice"></p>
-        <p class="modal__meta" id="modalMeta"></p>
+        <dl class="modal__specs" id="modalSpecs"></dl>
         <p class="modal__desc" id="modalDesc"></p>
+        <p class="modal__sizes-label" id="modalSizesLabel"></p>
         <ul class="modal__sizes" id="modalSizes" aria-label="Tamanhos disponíveis"></ul>
         <p class="modal__counter" id="modalCounter" aria-live="polite"></p>
         <div class="modal__actions">
@@ -171,7 +171,12 @@
     <button class="modal__nav modal__nav--next" id="modalNext" type="button" aria-label="Próximo produto">→</button>
   </dialog>
 
-  <script src="./app/js/catalog.js" defer></script>
-  <script src="./app/js/app.js" defer></script>
+  <script defer src="./app/js/config.js"></script>
+  <script defer src="./app/js/data/catalog-files.js"></script>
+  <script defer src="./app/js/data/catalog-source.js"></script>
+  <script defer src="./app/js/domain/product.js"></script>
+  <script defer src="./app/js/data/catalog-repository.js"></script>
+  <script defer src="./app/js/ui/catalog-view.js"></script>
+  <script defer src="./app/js/app.js"></script>
 </body>
 </html>
