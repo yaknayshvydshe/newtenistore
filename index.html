@@ -18,6 +18,10 @@
 <body>
   <a class="skip-link" href="#catalogo">Pular para o catálogo</a>
 
+  <div class="topbar">
+    <p class="container topbar__inner">Frete grátis em compras acima de R$ 150</p>
+  </div>
+
   <header class="site-header">
     <div class="container header__inner">
       <a class="brand" href="./index.html" aria-label="New Tenis Store, página inicial">
@@ -25,25 +29,28 @@
         <span>New Tenis Store</span>
       </a>
 
-      <nav class="nav" aria-label="Navegação principal">
+      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="primaryNav" aria-label="Abrir menu">
+        <svg class="menu-toggle__icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+        </svg>
+      </button>
+
+      <nav class="nav" id="primaryNav" aria-label="Navegação principal">
         <a href="#catalogo">Catálogo</a>
         <a href="#tamanhos">Tamanhos</a>
         <a href="#contato">Contato</a>
       </nav>
-
-      <a class="btn btn--whatsapp header__cta" href="https://wa.me/5545998048535" target="_blank" rel="noopener noreferrer">WhatsApp</a>
     </div>
   </header>
 
   <main>
     <section class="hero">
-      <div class="container hero__inner">
+      <div class="container hero__inner" data-reveal>
         <p class="eyebrow">Calçados para todos os estilos</p>
         <h1 class="hero__title">Tênis com estilo, conforto e preço justo.</h1>
         <p class="hero__lead">Modelos casuais, esportivos e retrô, com variedade de cores e tamanhos. Atendimento direto pelo WhatsApp e envio com rastreio.</p>
         <div class="hero__actions">
           <a class="btn btn--gold" href="#catalogo">Ver catálogo</a>
-          <a class="btn btn--whatsapp" href="https://wa.me/5545998048535" target="_blank" rel="noopener noreferrer">Falar no WhatsApp</a>
         </div>
         <ul class="hero__facts" aria-label="Informações da loja">
           <li>Atendimento direto</li>
@@ -55,7 +62,7 @@
 
     <section class="catalog" id="catalogo" aria-labelledby="catalogTitle">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head" data-reveal>
           <div>
             <p class="eyebrow eyebrow--dark">Catálogo</p>
             <h2 id="catalogTitle">Peças disponíveis</h2>
@@ -63,7 +70,7 @@
           <p class="count" id="count" aria-live="polite">Carregando catálogo…</p>
         </div>
 
-        <div class="toolbar">
+        <div class="toolbar" data-reveal>
           <div class="search">
             <label class="search__label" for="search">Buscar no catálogo</label>
             <input id="search" type="search" placeholder="Marca, modelo, cor ou tamanho" autocomplete="off" spellcheck="false">
@@ -95,14 +102,14 @@
 
     <section class="size-guide" id="tamanhos" aria-labelledby="sizeGuideTitle">
       <div class="container size-guide__inner">
-        <div class="size-guide__intro">
+        <div class="size-guide__intro" data-reveal>
           <p class="eyebrow eyebrow--dark">Guia de tamanhos</p>
           <h2 id="sizeGuideTitle">Encontre a numeração certa</h2>
           <p>Meça o pé no fim do dia, com a meia que costuma usar, e some de 0,5 a 1 cm de folga. As medidas são aproximadas e podem variar conforme o modelo.</p>
           <a class="text-link" href="https://wa.me/5545998048535" target="_blank" rel="noopener noreferrer">Falar com a loja sobre tamanhos →</a>
         </div>
 
-        <div class="size-grid" aria-label="Tamanhos e medidas aproximadas">
+        <div class="size-grid" aria-label="Tamanhos e medidas aproximadas" data-reveal>
           <div><strong>34</strong><span>22,5 cm</span></div>
           <div><strong>35</strong><span>23 cm</span></div>
           <div><strong>36</strong><span>23,5 cm</span></div>
@@ -120,28 +127,51 @@
   </main>
 
   <footer class="site-footer" id="contato">
-    <div class="container footer__inner">
-      <div class="footer__brand">
-        <p class="footer__name">New Tenis Store</p>
-        <p class="footer__tagline">Tênis e calçados com estilo, conforto e preço justo.</p>
+    <div class="container footer__grid" data-reveal>
+      <div class="footer__col">
+        <h2 class="footer__heading">A New Tenis</h2>
+        <ul class="footer__links">
+          <li><a href="#catalogo">Catálogo completo</a></li>
+          <li><a href="#tamanhos">Guia de tamanhos</a></li>
+          <li><a href="https://wa.me/5545998048535" target="_blank" rel="noopener noreferrer">Trocas e devoluções</a></li>
+          <li><a href="https://www.instagram.com/new.tenis.store" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        </ul>
       </div>
 
-      <nav class="footer__nav" aria-label="Links do rodapé">
-        <a href="#catalogo">Catálogo</a>
-        <a href="#tamanhos">Guia de tamanhos</a>
-        <a href="https://www.instagram.com/new.tenis.store" target="_blank" rel="noopener noreferrer">Instagram</a>
-        <a href="https://wa.me/5545998048535" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-      </nav>
+      <div class="footer__col">
+        <h2 class="footer__heading">Veja mais</h2>
+        <ul class="footer__links">
+          <li><a href="#catalogo">Tênis</a></li>
+          <li><a href="#catalogo">Botas</a></li>
+          <li><a href="#catalogo">Sandálias e rasteirinhas</a></li>
+          <li><a href="#catalogo">Infantil</a></li>
+        </ul>
+      </div>
 
-      <div class="footer__contact">
-        <p>Atendimento pelo WhatsApp</p>
-        <a href="https://wa.me/5545998048535" target="_blank" rel="noopener noreferrer">+55 45 99804-8535</a>
+      <div class="footer__col footer__col--contact">
+        <h2 class="footer__heading">Entre em contato</h2>
+        <p><a href="https://wa.me/5545998048535" target="_blank" rel="noopener noreferrer">WhatsApp: +55 45 99804-8535</a></p>
+        <p><a href="tel:+5545998073797">Telefone: +55 45 99807-3797</a></p>
+        <p class="footer__store">
+          <span class="footer__store-label">Loja física</span>
+          R. José Agapito Maltezo, 51 – Centro, Cafelândia/PR, CEP 85415-000. Segunda a sexta, das 8h às 18h; sábado, das 9h às 15h; domingo fechado.
+        </p>
+        <a class="footer__map" href="https://www.google.com/maps/search/?api=1&amp;query=R.%20Jos%C3%A9%20Agapito%20Maltezo%2C%2051%2C%20Cafel%C3%A2ndia%2C%20PR" target="_blank" rel="noopener noreferrer">Ver no mapa →</a>
       </div>
     </div>
 
-    <div class="container footer__bottom">
-      <p>© 2026 New Tenis Store. Todos os direitos reservados.</p>
-      <p>Feito para atendimento direto.</p>
+    <div class="container footer__bottom" data-reveal>
+      <ul class="footer__pay" aria-label="Formas de pagamento">
+        <li>Visa</li>
+        <li>Mastercard</li>
+        <li>Elo</li>
+        <li>Pix</li>
+        <li>Boleto</li>
+      </ul>
+      <div class="footer__legal">
+        <p>© 2026 New Tenis Store. Todos os direitos reservados.</p>
+        <p>CNPJ 42.834.919/0001-20 · Cafelândia/PR · Desde 2021 · Comércio varejista de vestuário e calçados.</p>
+      </div>
     </div>
   </footer>
 
@@ -177,6 +207,8 @@
   <script defer src="./app/js/domain/product.js"></script>
   <script defer src="./app/js/data/catalog-repository.js"></script>
   <script defer src="./app/js/ui/catalog-view.js"></script>
+  <script defer src="./app/js/ui/nav.js"></script>
+  <script defer src="./app/js/ui/scroll-reveal.js"></script>
   <script defer src="./app/js/app.js"></script>
 </body>
 </html>

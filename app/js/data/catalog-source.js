@@ -115,19 +115,34 @@
     },
 
     overrides: {
-      "adidas-adwhite-branco-ouro-light-34-37-149'90": {
+      "adidas-adwhite-branco-ouro-light-34-37-139'90": {
         cor: 'Branco e Ouro Light'
       },
       "veja-x180-10-camurcadulce-offwhite-35-36-39-149'90": {
         modelo: 'X180-10'
+      },
+      "boots-botas-meias-preto-35-99'90": {
+        nome: 'Bota Meia Longa'
+      },
+      "boots-botas-ziper-preta-34-36-99'90": {
+        nome: 'Botas Zíper'
+      },
+      "boots-coturno-pelucia-preto-34-36-99'90": {
+        nome: 'Bota Coturno Pelúcia'
+      },
+      "walking-rasteirinha-arco-iris-34-37-49'90": {
+        nome: 'Rasteirinha'
+      },
+      "walking-rasteirinha-nude-34-35-36-37-38-39-79'90": {
+        nome: 'Sandália'
       }
     },
 
     featured: [
-      "nike-air-force-branco-34-35-36-37-38-39-42-129'90.webp",
+      "nike-air-force-branco-34-35-36-37-38-39-42-149'90.webp",
       "adidas-samba-branco-azul-36-149'90.webp",
-      "vans-oldskool-preto-branco-34-35-36-38-41-42-109'90.webp",
-      "nike-dunk-low-branco-34-139'90.webp",
+      "vans-oldskool-preto-branco-34-35-36-38-41-42-139'90.webp",
+      "nike-dunk-low-branco-34-149'90.webp",
       "newbalance-casual-branco-36-37-149'90.webp",
       "veja-v023-branco-preto-35-36-37-129'90.webp"
     ]

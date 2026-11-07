@@ -109,7 +109,10 @@
     const preco =
       override.preco != null ? Number(override.preco) : price;
 
-    const nome = [marca, modelo].filter(Boolean).join(' ') || 'Ref. ' + stem;
+    const nome =
+      override.nome ||
+      [marca, modelo].filter(Boolean).join(' ') ||
+      'Ref. ' + stem;
     const destaque =
       override.destaque ||
       ((source.featured || []).includes(file) ? 'Destaque' : '');
