@@ -4,9 +4,9 @@
  *
  * Padrão dos arquivos em app/img/otimizadas/:
  *   marca-modelo-cor-tamanhos-preço.webp
- *   nike-air-force-branco-34-35-36-37-38-39-42-129'90.webp
+ *   nike-air-force-branco-34-35-36-37-38-39-42-109'90.webp
  *
- * O preço é sempre o último trecho, no formato 129'90.
+ * O preço é sempre o último trecho, no formato 109'90.
  * Os tamanhos são os números de dois dígitos antes do preço.
  * A cor começa na primeira palavra conhecida de colorWords;
  * tudo o que vem antes dela é marca + modelo.
@@ -139,7 +139,7 @@
     },
 
     featured: [
-      "nike-air-force-branco-34-35-36-37-38-39-42-149'90.webp",
+      "nike-air-force-branco-34-35-36-37-38-39-42-109'90.webp",
       "adidas-samba-branco-azul-36-149'90.webp",
       "vans-oldskool-preto-branco-34-35-36-38-41-42-139'90.webp",
       "nike-dunk-low-branco-34-149'90.webp",

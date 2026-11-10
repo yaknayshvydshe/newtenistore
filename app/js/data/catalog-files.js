@@ -37,7 +37,7 @@ window.NTS.catalogFiles = [
   "nike-7001ink-preto-42-199'90.webp",
   "nike-7099kill-branco-35-37-38-39-40-139'90.webp",
   "nike-7099kill-creme-nude-37-38-139'90.webp",
-  "nike-air-force-branco-34-35-36-37-38-39-42-149'90.webp",
+  "nike-air-force-branco-34-35-36-37-38-39-42-109'90.webp",
   "nike-air-force-branco-holografico-37-149'90.webp",
   "nike-air-force-caramelo-40-41-43-199'90.webp",
   "nike-air-force-jeans-branco-34-149'90.webp",
