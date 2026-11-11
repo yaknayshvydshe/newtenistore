@@ -118,6 +118,9 @@
       "adidas-adwhite-branco-ouro-light-34-37-139'90": {
         cor: 'Branco e Ouro Light'
       },
+      "converse-allstar-preto-36-37-38-39-41-42-109'90": {
+        preco: 99.9
+      },
       "veja-x180-10-camurcadulce-offwhite-35-36-39-149'90": {
         modelo: 'X180-10'
       },
@@ -139,12 +142,12 @@
     },
 
     featured: [
+      "running-slipon-pink-35-37-39-49'90.webp",
+      "vans-ultrarange-marinho-branco-35-36-37-38-39-99'90.webp",
+      "converse-allstar-preto-36-37-38-39-41-42-109'90.webp",
       "nike-air-force-branco-34-35-36-37-38-39-42-109'90.webp",
-      "adidas-samba-branco-azul-36-149'90.webp",
-      "vans-oldskool-preto-branco-34-35-36-38-41-42-139'90.webp",
-      "nike-dunk-low-branco-34-149'90.webp",
-      "newbalance-casual-branco-36-37-149'90.webp",
-      "veja-v023-branco-preto-35-36-37-129'90.webp"
+      "lacoste-noruega-branco-39-40-42-43-129'90.webp",
+      "nike-air-force-jeans-preto-branco-37-38-139'90.webp"
     ]
   };
 })();
