@@ -3,17 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>New Tenis Store | Tênis com estilo e conforto</title>
-  <meta name="description" content="Tênis casuais, esportivos e retrô com variedade de cores e tamanhos. Atendimento direto pelo WhatsApp e envio com rastreio.">
+  <title>New Tenis Store | Tênis Nike, Adidas, Vans e All Star</title>
+  <meta name="description" content="Loja de tênis e calçados em Cafelândia/PR. Nike, Adidas, Puma, Vans, All Star e mais, com preço baixo, opções para presente e atendimento pelo WhatsApp.">
+  <meta name="keywords" content="nike, tenis, calçado, vans, allstar, adidas, puma, tenis barato, tenis de presente, comprar presente, presentes, tenis preço baixo, tenis mercado livre, tenis shopee, tenis amazon, loja de tenis, loja de calçados">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://newtenistore.com.br/">
   <meta name="theme-color" content="#111827">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="New Tenis Store">
   <meta property="og:locale" content="pt_BR">
-  <meta property="og:title" content="New Tenis Store | Tênis e calçados com estilo e conforto">
-  <meta property="og:description" content="Tênis casuais, esportivos e retrô com variedade de cores e tamanhos. Atendimento direto pelo WhatsApp e envio com rastreio.">
-  <meta property="og:image" content="./app/img/logo.webp">
+  <meta property="og:title" content="New Tenis Store | Tênis Nike, Adidas, Vans e All Star">
+  <meta property="og:description" content="Loja de tênis e calçados em Cafelândia/PR. Nike, Adidas, Puma, Vans, All Star e mais, com preço baixo e atendimento pelo WhatsApp.">
+  <meta property="og:url" content="https://newtenistore.com.br/">
+  <meta property="og:image" content="https://newtenistore.com.br/app/img/logo.webp">
+  <meta property="og:image:alt" content="Logo da New Tenis Store">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="./app/img/favicon.webp" type="image/webp">
-  <link rel="stylesheet" href="./app/css/styles.css">
+  <link rel="stylesheet" href="./app/css/styles.css?v=20261113-1">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ShoeStore",
+    "name": "New Tenis Store",
+    "url": "https://newtenistore.com.br/",
+    "image": "https://newtenistore.com.br/app/img/logo.webp",
+    "description": "Loja de tênis e calçados em Cafelândia/PR. Nike, Adidas, Puma, Vans, All Star e mais, com preço baixo e atendimento pelo WhatsApp.",
+    "telephone": "+55-45-99804-8535",
+    "priceRange": "R$ 19,90 - R$ 199,90",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "R. José Agapito Maltezo, 51",
+      "addressLocality": "Cafelândia",
+      "addressRegion": "PR",
+      "postalCode": "85415-000",
+      "addressCountry": "BR"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "08:00",
+        "closes": "18:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Saturday",
+        "opens": "09:00",
+        "closes": "15:00"
+      }
+    ],
+    "sameAs": ["https://www.instagram.com/new.tenis.store"]
+  }
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#catalogo">Pular para o catálogo</a>
@@ -45,16 +86,19 @@
 
   <main>
     <section class="hero">
+      <video class="hero__video" id="heroVideo" autoplay muted loop playsinline preload="metadata" poster="./app/video/hero-poster.webp" aria-hidden="true" tabindex="-1">
+        <source src="./app/video/hero.mp4" type="video/mp4">
+      </video>
+      <div class="hero__overlay" aria-hidden="true"></div>
       <div class="container hero__inner" data-reveal>
         <p class="eyebrow">Calçados para todos os estilos</p>
         <h1 class="hero__title">Tênis com estilo, conforto e preço justo.</h1>
-        <p class="hero__lead">Modelos casuais, esportivos e retrô, com variedade de cores e tamanhos. Atendimento direto pelo WhatsApp e envio com rastreio.</p>
+        <p class="hero__lead">Modelos casuais, esportivos e retrô de Nike, Adidas, Puma, Vans, Converse All Star e outras marcas, com variedade de cores e tamanhos. Atendimento direto pelo WhatsApp.</p>
         <div class="hero__actions">
           <a class="btn btn--gold" href="#catalogo">Ver catálogo</a>
         </div>
         <ul class="hero__facts" aria-label="Informações da loja">
           <li>Atendimento direto</li>
-          <li>Envio com rastreio</li>
           <li>Troca em até 7 dias</li>
         </ul>
       </div>
@@ -75,9 +119,14 @@
             <label class="search__label" for="search">Buscar no catálogo</label>
             <input id="search" type="search" placeholder="Marca, modelo, cor ou tamanho" autocomplete="off" spellcheck="false">
           </div>
-          <div class="chips" id="filters" role="group" aria-label="Filtrar catálogo">
-            <button class="chip is-active" type="button" data-filter="all" aria-pressed="true">Todos</button>
-            <button class="chip" type="button" data-filter="featured" aria-pressed="false">Destaques</button>
+          <div class="toolbar__filters">
+            <label class="select-field" id="sizeFilterField" for="sizeFilter">
+              <span class="search__label">Tamanho</span>
+              <select id="sizeFilter">
+                <option value="">Todos os tamanhos</option>
+              </select>
+            </label>
+            <button class="btn btn--ghost toolbar__clear" id="clearFilters" type="button" hidden>Limpar filtros</button>
           </div>
         </div>
 
@@ -91,7 +140,7 @@
         <div class="empty" id="empty" hidden>
           <p class="empty__title">Nenhuma peça encontrada.</p>
           <p class="empty__text" id="emptyText">Tente outra marca, modelo, cor ou tamanho.</p>
-          <button class="btn btn--ghost" id="emptyClear" type="button">Limpar busca</button>
+          <button class="btn btn--ghost" id="emptyClear" type="button">Limpar filtros</button>
         </div>
 
         <div class="catalog__more">
@@ -110,6 +159,14 @@
         </div>
 
         <div class="size-grid" aria-label="Tamanhos e medidas aproximadas" data-reveal>
+          <div><strong>26</strong><span>18,5 cm</span></div>
+          <div><strong>27</strong><span>19 cm</span></div>
+          <div><strong>28</strong><span>19,5 cm</span></div>
+          <div><strong>29</strong><span>20 cm</span></div>
+          <div><strong>30</strong><span>20,5 cm</span></div>
+          <div><strong>31</strong><span>21 cm</span></div>
+          <div><strong>32</strong><span>21,5 cm</span></div>
+          <div><strong>33</strong><span>22 cm</span></div>
           <div><strong>34</strong><span>22,5 cm</span></div>
           <div><strong>35</strong><span>23 cm</span></div>
           <div><strong>36</strong><span>23,5 cm</span></div>
@@ -120,7 +177,6 @@
           <div><strong>41</strong><span>26 cm</span></div>
           <div><strong>42</strong><span>26,5 cm</span></div>
           <div><strong>43</strong><span>27 cm</span></div>
-          <div><strong>44</strong><span>27,5 cm</span></div>
         </div>
       </div>
     </section>
@@ -133,25 +189,22 @@
         <ul class="footer__links">
           <li><a href="#catalogo">Catálogo completo</a></li>
           <li><a href="#tamanhos">Guia de tamanhos</a></li>
-          <li><a href="https://wa.me/5545998048535" target="_blank" rel="noopener noreferrer">Trocas e devoluções</a></li>
-          <li><a href="https://www.instagram.com/new.tenis.store" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          <li><a href="./privacy.html">Trocas e devoluções (7 dias)</a></li>
         </ul>
       </div>
 
       <div class="footer__col">
-        <h2 class="footer__heading">Veja mais</h2>
+        <h2 class="footer__heading">Atendimento</h2>
         <ul class="footer__links">
-          <li><a href="#catalogo">Tênis</a></li>
-          <li><a href="#catalogo">Botas</a></li>
-          <li><a href="#catalogo">Sandálias e rasteirinhas</a></li>
-          <li><a href="#catalogo">Infantil</a></li>
+          <li><a href="https://wa.me/5545998048535" target="_blank" rel="noopener noreferrer">Falar pelo WhatsApp</a></li>
+          <li><a href="https://www.instagram.com/new.tenis.store" target="_blank" rel="noopener noreferrer">Falar pelo Instagram</a></li>
+          <li><a href="https://www.google.com/maps/search/?api=1&amp;query=R.%20Jos%C3%A9%20Agapito%20Maltezo%2C%2051%2C%20Cafel%C3%A2ndia%2C%20PR" target="_blank" rel="noopener noreferrer">Como chegar</a></li>
         </ul>
       </div>
 
       <div class="footer__col footer__col--contact">
         <h2 class="footer__heading">Entre em contato</h2>
         <p><a href="https://wa.me/5545998048535" target="_blank" rel="noopener noreferrer">WhatsApp: +55 45 99804-8535</a></p>
-        <p><a href="tel:+5545998073797">Telefone: +55 45 99807-3797</a></p>
         <p class="footer__store">
           <span class="footer__store-label">Loja física</span>
           R. José Agapito Maltezo, 51 – Centro, Cafelândia/PR, CEP 85415-000. Segunda a sexta, das 8h às 18h; sábado, das 9h às 15h; domingo fechado.
@@ -170,12 +223,12 @@
       </ul>
       <div class="footer__legal">
         <p>© 2026 New Tenis Store. Todos os direitos reservados.</p>
-        <p>CNPJ 42.834.919/0001-20 · Cafelândia/PR · Desde 2021 · Comércio varejista de vestuário e calçados.</p>
+        <p>CNPJ 42.834.919/0001-20 · Cafelândia/PR · Desde 2021 · Comércio varejista de tênis e calçados.</p>
       </div>
     </div>
   </footer>
 
-  <dialog class="modal" id="productModal" aria-labelledby="modalTitle">
+  <dialog class="modal" id="productModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc">
     <button class="modal__close" id="modalClose" type="button" aria-label="Fechar detalhes">×</button>
     <button class="modal__nav modal__nav--prev" id="modalPrev" type="button" aria-label="Produto anterior">←</button>
 
@@ -187,10 +240,12 @@
       <div class="modal__body">
         <h2 class="modal__title" id="modalTitle"></h2>
         <p class="modal__price" id="modalPrice"></p>
+        <p class="modal__price-note" id="modalPriceNote" hidden></p>
         <dl class="modal__specs" id="modalSpecs"></dl>
         <p class="modal__desc" id="modalDesc"></p>
         <p class="modal__sizes-label" id="modalSizesLabel"></p>
-        <ul class="modal__sizes" id="modalSizes" aria-label="Tamanhos disponíveis"></ul>
+        <ul class="modal__sizes" id="modalSizes" role="radiogroup" aria-labelledby="modalSizesLabel" aria-describedby="modalSizeHint"></ul>
+        <p class="modal__size-hint" id="modalSizeHint" aria-live="polite"></p>
         <p class="modal__counter" id="modalCounter" aria-live="polite"></p>
         <div class="modal__actions">
           <a class="btn btn--whatsapp" id="modalWhatsApp" href="https://wa.me/5545998048535" target="_blank" rel="noopener noreferrer">Tenho interesse</a>
@@ -201,14 +256,14 @@
     <button class="modal__nav modal__nav--next" id="modalNext" type="button" aria-label="Próximo produto">→</button>
   </dialog>
 
-  <script defer src="./app/js/config.js"></script>
-  <script defer src="./app/js/data/catalog-files.js"></script>
-  <script defer src="./app/js/data/catalog-source.js"></script>
-  <script defer src="./app/js/domain/product.js"></script>
-  <script defer src="./app/js/data/catalog-repository.js"></script>
-  <script defer src="./app/js/ui/catalog-view.js"></script>
-  <script defer src="./app/js/ui/nav.js"></script>
-  <script defer src="./app/js/ui/scroll-reveal.js"></script>
-  <script defer src="./app/js/app.js"></script>
+  <script defer src="./app/js/config.js?v=20261113-1"></script>
+  <script defer src="./app/js/data/catalog-files.js?v=20261113-1"></script>
+  <script defer src="./app/js/data/catalog-source.js?v=20261113-1"></script>
+  <script defer src="./app/js/domain/product.js?v=20261113-1"></script>
+  <script defer src="./app/js/data/catalog-repository.js?v=20261113-1"></script>
+  <script defer src="./app/js/ui/catalog-view.js?v=20261113-1"></script>
+  <script defer src="./app/js/ui/nav.js?v=20261113-1"></script>
+  <script defer src="./app/js/ui/scroll-reveal.js?v=20261113-1"></script>
+  <script defer src="./app/js/app.js?v=20261113-1"></script>
 </body>
 </html>

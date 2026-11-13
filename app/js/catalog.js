@@ -4,7 +4,7 @@
  * Substitui o catalog.js gerado pelo build-catalog.mjs.
  *
  * Imagens: cada item pode ter o campo "imagem" com o nome do arquivo
- * (ex.: "nike-air-force-branco-34-35-36-37-38-39-42-109'90.webp").
+ * (ex.: "nike-air-force-branco-34-35-36-37-38-39-42-139'90.webp").
  * Sem esse campo, o card mostra "Foto em breve".
  */
 (function () {

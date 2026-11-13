@@ -43,7 +43,22 @@
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
       .toLowerCase()
+      .replace(/[^a-z0-9]+/g, ' ')
       .trim();
+
+  const searchWords = (value) => normalize(value).split(/\s+/).filter(Boolean);
+
+  const matchesSearch = (haystack, query) => {
+    const terms = searchWords(query);
+    if (terms.length === 0) return true;
+
+    const text = normalize(haystack);
+    const compactText = text.replace(/\s+/g, '');
+
+    return terms.every(
+      (term) => text.includes(term) || (term.length > 2 && compactText.includes(term))
+    );
+  };
 
   const formatPrice = (value) => {
     if (typeof value === 'number' && Number.isFinite(value)) {
@@ -61,6 +76,37 @@
     }
     if (sizes.length === 1) return 'Tamanho ' + sizes[0];
     return 'Tamanhos ' + sizes.join(', ');
+  };
+
+  const installmentsFor = (preco, config) => {
+    const rule = config && config.installments;
+    if (!rule || typeof preco !== 'number' || !Number.isFinite(preco)) return null;
+
+    const eligiblePrice = Number(rule.eligiblePrice);
+    const count = Number(rule.count);
+    const total = Number(rule.total);
+    if (
+      !Number.isFinite(eligiblePrice) ||
+      Math.abs(preco - eligiblePrice) > 0.009 ||
+      !Number.isInteger(count) ||
+      count < 2 ||
+      !Number.isFinite(total)
+    ) {
+      return null;
+    }
+
+    const value = Math.round((total * 100) / count + 1e-6) / 100;
+    return {
+      count,
+      value,
+      valueTexto: formatPrice(value),
+      total,
+      totalTexto: formatPrice(total),
+      cash: preco,
+      cashTexto: formatPrice(preco),
+      label: count + 'x de ' + formatPrice(value),
+      note: 'Total ' + formatPrice(total) + ' · ' + formatPrice(preco) + ' à vista'
+    };
   };
 
   const parse = (file, source, config) => {
@@ -119,9 +165,18 @@
     const descricao = override.descricao || '';
     const imagem = override.imagem || (config.imageBase + file);
     const precoTexto = formatPrice(preco);
+    const parcelamento = installmentsFor(preco, config);
     const tamanhosTexto = sizesLabel(tamanhos);
     const search = normalize(
-      [nome, marca, modelo, cor, tamanhos.join(' '), precoTexto].join(' ')
+      [
+        nome,
+        marca,
+        modelo,
+        cor,
+        tamanhos.join(' '),
+        precoTexto,
+        parcelamento ? parcelamento.label + ' ' + parcelamento.totalTexto : ''
+      ].join(' ')
     );
 
     return {
@@ -135,11 +190,14 @@
       tamanhosTexto,
       preco,
       precoTexto,
+      parcelamento,
       nome,
       destaque,
       descricao,
       imagem,
-      alt: [nome, cor].filter(Boolean).join(' - '),
+      alt: [nome, cor, tamanhos.length ? tamanhosTexto : '']
+        .filter(Boolean)
+        .join(' - '),
       search
     };
   };
@@ -148,6 +206,8 @@
     parse,
     formatPrice,
     normalize,
+    searchWords,
+    matchesSearch,
     sizesLabel
   };
 })();

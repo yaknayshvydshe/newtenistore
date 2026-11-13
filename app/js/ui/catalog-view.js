@@ -11,7 +11,8 @@
 
   const state = {
     query: '',
-    filter: 'all',
+    size: '',
+    selectedSize: '',
     visible: config.pageSize || 12,
     current: -1,
     trigger: null,
@@ -33,27 +34,29 @@
     if (child) parent.appendChild(child);
   };
 
-  const words = () => NTS.Product.normalize(state.query).split(/\s+/).filter(Boolean);
-
-  const filtered = () => {
-    const queryWords = words();
-    return state.products.filter((product) => {
-      if (state.filter === 'featured' && !product.destaque) return false;
-      if (queryWords.length === 0) return true;
-      return queryWords.every((word) => product.search.includes(word));
+  const filtered = () =>
+    state.products.filter((product) => {
+      if (state.size && !product.tamanhos.includes(state.size)) return false;
+      return NTS.Product.matchesSearch(product.search, state.query);
     });
-  };
 
-  const hasFeatured = () => state.products.some((product) => product.destaque);
+  const hasActiveFilters = () =>
+    Boolean(state.query.trim()) || Boolean(state.size);
 
-  const image = (product, className) => {
+  const registeredSizes = () =>
+    Array.from(new Set(state.products.flatMap((product) => product.tamanhos))).sort(
+      (a, b) => Number(a) - Number(b) || a.localeCompare(b)
+    );
+
+  const image = (product, className, eager, highPriority) => {
     const img = node('img', className);
     img.src = product.imagem;
     img.alt = product.alt;
     img.width = 900;
     img.height = 1200;
-    img.loading = 'lazy';
+    img.loading = eager ? 'eager' : 'lazy';
     img.decoding = 'async';
+    if (highPriority) img.setAttribute('fetchpriority', 'high');
     img.addEventListener('error', () => {
       if (img.dataset.fallback === 'true') return;
       img.dataset.fallback = 'true';
@@ -72,7 +75,7 @@
     return row;
   };
 
-  const card = (product) => {
+  const card = (product, index) => {
     const item = node('li', 'card');
     const button = node('button', 'card__btn');
     button.type = 'button';
@@ -80,7 +83,7 @@
     button.setAttribute('aria-label', 'Ver detalhes de ' + product.nome);
 
     const media = node('span', 'card__media');
-    media.appendChild(image(product, 'card__img'));
+    media.appendChild(image(product, 'card__img', index < 4, index === 0));
     if (product.destaque) {
       media.appendChild(node('span', 'card__badge', product.destaque));
     }
@@ -92,7 +95,16 @@
       body,
       spec('Tamanhos', product.tamanhos.length ? product.tamanhos.join(', ') : '')
     );
-    body.appendChild(node('span', 'card__price', product.precoTexto));
+    body.appendChild(
+      node(
+        'span',
+        'card__price',
+        product.parcelamento ? product.parcelamento.label : product.precoTexto
+      )
+    );
+    if (product.parcelamento) {
+      body.appendChild(node('span', 'card__price-note', product.parcelamento.note));
+    }
     body.appendChild(node('span', 'card__cta', 'Ver detalhes →'));
 
     button.append(media, body);
@@ -121,13 +133,99 @@
     const isEmpty = list.length === 0 && state.products.length > 0;
     el.empty.hidden = !isEmpty;
     if (isEmpty) {
-      el.emptyText.textContent = state.query
+      el.emptyText.textContent = state.query.trim()
         ? 'Não encontramos nada para “' + state.query + '”. Tente outra marca, modelo, cor ou tamanho.'
-        : 'Ainda não há peças cadastradas. Fale com a loja pelo WhatsApp.';
+        : 'Nenhuma peça corresponde aos filtros selecionados. Limpe os filtros para ver o catálogo completo.';
     }
 
-    const featuredChip = el.filters.querySelector('[data-filter="featured"]');
-    if (featuredChip) featuredChip.hidden = !hasFeatured();
+    el.clearFilters.hidden = !hasActiveFilters();
+  };
+
+  const resetFilters = () => {
+    state.query = '';
+    state.size = '';
+    state.selectedSize = '';
+    state.visible = config.pageSize;
+    el.search.value = '';
+    el.sizeFilter.value = '';
+    render();
+    el.search.focus();
+  };
+
+  const fillSizeFilter = () => {
+    const sizes = registeredSizes();
+    const all = node('option', '', 'Todos os tamanhos');
+    all.value = '';
+    el.sizeFilter.replaceChildren(
+      all,
+      ...sizes.map((size) => {
+        const option = node('option', '', size);
+        option.value = size;
+        return option;
+      })
+    );
+    el.sizeFilter.value = state.size;
+    el.sizeFilterField.hidden = sizes.length === 0;
+  };
+
+  const updateWhatsApp = (product) => {
+    const installment = product.parcelamento
+      ? ' Vi que sai em ' +
+        product.parcelamento.label +
+        ' (total ' + product.parcelamento.totalTexto + ').'
+      : '';
+    const message =
+      'Oi! Tenho interesse no produto ' +
+      product.nome +
+      (product.cor ? ' na cor ' + product.cor : '') +
+      (state.selectedSize ? ', tamanho ' + state.selectedSize : '') +
+      '.' +
+      installment +
+      ' Pode confirmar a disponibilidade?';
+    el.modalWhatsApp.href =
+      'https://wa.me/' + config.whatsapp + '?text=' + encodeURIComponent(message);
+  };
+
+  const renderSizes = (product) => {
+    state.selectedSize = '';
+    el.modalSizes.replaceChildren();
+
+    const hasSizes = product.tamanhos.length > 0;
+    el.modalSizes.hidden = !hasSizes;
+    el.modalSizesLabel.textContent = hasSizes
+      ? 'Escolha um tamanho (opcional)'
+      : 'Consulte a numeração disponível para este modelo.';
+    el.modalSizeHint.textContent = hasSizes
+      ? 'Nenhum tamanho selecionado. A mensagem será enviada sem tamanho.'
+      : 'A mensagem será enviada sem tamanho.';
+
+    if (!hasSizes) return;
+
+    el.modalSizes.replaceChildren(
+      ...product.tamanhos.map((size, index) => {
+        const item = node('li', 'modal__size-option');
+        item.setAttribute('role', 'none');
+
+        const input = document.createElement('input');
+        input.type = 'radio';
+        input.name = 'modalSize';
+        input.id = 'modalSizeOption-' + index;
+        input.value = size;
+        input.className = 'sr-only modal__size-input';
+        input.setAttribute('aria-label', 'Tamanho ' + size);
+        input.addEventListener('change', () => {
+          state.selectedSize = size;
+          updateWhatsApp(product);
+          el.modalSizeHint.textContent = 'Tamanho ' + size + ' selecionado.';
+        });
+
+        const label = node('label', 'modal__size-label', size);
+        label.htmlFor = input.id;
+
+        item.append(input, label);
+        return item;
+      })
+    );
   };
 
   const fillModal = (index) => {
@@ -143,7 +241,11 @@
     el.modalImg.classList.remove('is-fallback');
 
     el.modalTitle.textContent = product.nome;
-    el.modalPrice.textContent = product.precoTexto;
+    el.modalPrice.textContent = product.parcelamento
+      ? product.parcelamento.label
+      : product.precoTexto;
+    el.modalPriceNote.textContent = product.parcelamento ? product.parcelamento.note : '';
+    el.modalPriceNote.hidden = !product.parcelamento;
 
     el.modalSpecs.replaceChildren();
     [
@@ -162,23 +264,10 @@
       product.descricao ||
       'Consulte disponibilidade e condições de envio pelo WhatsApp.';
 
-    el.modalSizes.replaceChildren(
-      ...product.tamanhos.map((size) => node('li', '', size))
-    );
-    el.modalSizes.hidden = product.tamanhos.length === 0;
-    el.modalSizesLabel.textContent = product.tamanhos.length
-      ? 'Tamanhos disponíveis'
-      : 'Consulte a numeração disponível para este modelo.';
+    renderSizes(product);
+    updateWhatsApp(product);
 
     el.modalCounter.textContent = index + 1 + ' de ' + list.length;
-
-    const message =
-      'Oi! Tenho interesse no ' +
-      product.nome +
-      (product.cor ? ' na cor ' + product.cor : '') +
-      '. Tem disponível?';
-    el.modalWhatsApp.href =
-      'https://wa.me/' + config.whatsapp + '?text=' + encodeURIComponent(message);
   };
 
   const openModal = (id, trigger) => {
@@ -210,6 +299,8 @@
   };
 
   const closeModal = () => {
+    const isOpen = el.modal.open || el.modal.hasAttribute('open');
+    if (!isOpen) return;
     if (typeof el.modal.close === 'function' && el.modal.open) {
       el.modal.close();
       return;
@@ -225,6 +316,13 @@
     fillModal(next);
   };
 
+  const modalFocusables = () =>
+    Array.from(
+      el.modal.querySelectorAll(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )
+    ).filter((element) => !element.hidden && element.getClientRects().length > 0);
+
   const bind = () => {
     el.search.addEventListener('input', () => {
       state.query = el.search.value;
@@ -232,19 +330,9 @@
       render();
     });
 
-    el.filters.addEventListener('click', (event) => {
-      const chip = event.target.closest('.chip');
-      if (!chip) return;
-
-      state.filter = chip.dataset.filter === 'featured' ? 'featured' : 'all';
+    el.sizeFilter.addEventListener('change', () => {
+      state.size = el.sizeFilter.value;
       state.visible = config.pageSize;
-
-      el.filters.querySelectorAll('.chip').forEach((button) => {
-        const active = button === chip;
-        button.classList.toggle('is-active', active);
-        button.setAttribute('aria-pressed', String(active));
-      });
-
       render();
     });
 
@@ -262,26 +350,17 @@
       if (buttons[before]) buttons[before].focus();
     });
 
-    el.emptyClear.addEventListener('click', () => {
-      state.query = '';
-      state.filter = 'all';
-      state.visible = config.pageSize;
-      el.search.value = '';
-
-      el.filters.querySelectorAll('.chip').forEach((button) => {
-        const active = button.dataset.filter === 'all';
-        button.classList.toggle('is-active', active);
-        button.setAttribute('aria-pressed', String(active));
-      });
-
-      render();
-      el.search.focus();
-    });
+    el.clearFilters.addEventListener('click', resetFilters);
+    el.emptyClear.addEventListener('click', resetFilters);
 
     el.modalClose.addEventListener('click', closeModal);
     el.modalPrev.addEventListener('click', () => step(-1));
     el.modalNext.addEventListener('click', () => step(1));
     el.modal.addEventListener('close', cleanup);
+    el.modal.addEventListener('cancel', (event) => {
+      event.preventDefault();
+      closeModal();
+    });
     el.modal.addEventListener('click', (event) => {
       if (event.target === el.modal) closeModal();
     });
@@ -296,6 +375,36 @@
 
     document.addEventListener('keydown', (event) => {
       if (!el.modal.open) return;
+
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeModal();
+        return;
+      }
+
+      if (event.key === 'Tab') {
+        const items = modalFocusables();
+        if (items.length === 0) return;
+
+        const first = items[0];
+        const last = items[items.length - 1];
+        const active = document.activeElement;
+
+        if (event.shiftKey) {
+          if (active === first || !el.modal.contains(active)) {
+            event.preventDefault();
+            last.focus();
+          }
+        } else if (active === last || !el.modal.contains(active)) {
+          event.preventDefault();
+          first.focus();
+        }
+        return;
+      }
+
+      const target = event.target;
+      if (target instanceof Element && target.closest('#modalSizes')) return;
+
       if (event.key === 'ArrowLeft') {
         event.preventDefault();
         step(-1);
@@ -312,7 +421,9 @@
 
     el = {
       search: byId('search'),
-      filters: byId('filters'),
+      sizeFilter: byId('sizeFilter'),
+      sizeFilterField: byId('sizeFilterField'),
+      clearFilters: byId('clearFilters'),
       grid: byId('grid'),
       count: byId('count'),
       loadMore: byId('loadMore'),
@@ -324,10 +435,12 @@
       modalImg: byId('modalImg'),
       modalTitle: byId('modalTitle'),
       modalPrice: byId('modalPrice'),
+      modalPriceNote: byId('modalPriceNote'),
       modalSpecs: byId('modalSpecs'),
       modalDesc: byId('modalDesc'),
       modalSizes: byId('modalSizes'),
       modalSizesLabel: byId('modalSizesLabel'),
+      modalSizeHint: byId('modalSizeHint'),
       modalCounter: byId('modalCounter'),
       modalWhatsApp: byId('modalWhatsApp'),
       modalClose: byId('modalClose'),
@@ -342,6 +455,7 @@
     }
 
     bind();
+    fillSizeFilter();
     render();
   };
 
