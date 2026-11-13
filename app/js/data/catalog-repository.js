@@ -37,12 +37,22 @@
   const rest = products.filter((product) => !featuredSet.has(product.file));
   const ordered = featured.concat(rest);
 
+  // Produtos com o preço prioritário (ex.: campanha de 4x) aparecem primeiro,
+  // mantendo a ordem relativa definida por destaques e ordem alfabética.
+  const priorityPrice = Number(config && config.priorityPrice);
+  const isPriority = (product) =>
+    Number.isFinite(priorityPrice) &&
+    Math.abs(product.preco - priorityPrice) < 0.009;
+  const prioritized = ordered.filter(isPriority);
+  const remaining = ordered.filter((product) => !isPriority(product));
+  const sorted = prioritized.concat(remaining);
+
   NTS.repository = {
     all() {
-      return ordered.slice();
+      return sorted.slice();
     },
     count() {
-      return ordered.length;
+      return sorted.length;
     }
   };
 })();

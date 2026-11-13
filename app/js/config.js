@@ -12,6 +12,7 @@
     imageBase: './app/img/otimizadas/',
     fallbackImage: './app/img/logo.webp',
     pageSize: 24,
+    priorityPrice: 199.9,
     installments: {
       eligiblePrice: 199.9,
       count: 4,
