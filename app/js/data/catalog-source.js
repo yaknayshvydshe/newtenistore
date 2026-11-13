@@ -146,8 +146,7 @@
       "vans-ultrarange-marinho-branco-35-36-37-38-39-99'90.webp",
       "converse-allstar-preto-36-37-38-39-41-42-109'90.webp",
       "nike-air-force-branco-34-35-36-37-38-39-42-139'90.webp",
-      "lacoste-noruega-branco-39-40-42-43-129'90.webp",
-      "nike-air-force-jeans-preto-branco-37-38-139'90.webp"
+      "veja-8002voi-35-36-37-38-39-40-139'90.webp"
     ]
   };
 })();

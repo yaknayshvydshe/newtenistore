@@ -146,7 +146,7 @@ window.IMAGE_META = {
     "vans-oldskool-tobacco-35-36-40-41-119'90.webp",
     "vans-ultrarange-marinho-branco-35-36-37-38-39-99'90.webp",
     "vans-ultrarange-preto-38-41-99'90.webp",
-    "veja-8002voi-35-36-37-38-39-40-129'90.webp",
+    "veja-8002voi-35-36-37-38-39-40-139'90.webp",
     "veja-casual-preto-branco-35-37-39-149'90.webp",
     "veja-v023-branco-preto-35-36-37-129'90.webp",
     "veja-v023-offwhite-jeansdenim-34-36-39-129'90.webp",

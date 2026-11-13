@@ -10,6 +10,13 @@
   const nav = document.getElementById('primaryNav');
   if (!header || !toggle || !nav) return;
 
+  const syncScrolled = () => {
+    header.classList.toggle('is-scrolled', window.scrollY > 8);
+  };
+
+  syncScrolled();
+  window.addEventListener('scroll', syncScrolled, { passive: true });
+
   const isOpen = () => header.classList.contains('is-menu-open');
 
   const setOpen = (open) => {

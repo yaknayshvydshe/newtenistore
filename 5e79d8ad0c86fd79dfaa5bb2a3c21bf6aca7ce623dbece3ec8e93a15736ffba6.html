@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Painel de estoque | New Tenis Store</title>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="theme-color" content="#111827">
+<link rel="icon" href="./app/img/favicon.webp" type="image/webp">
+<style>
+  :root{--ink:#111827;--muted:#5b6472;--line:#e5e3de;--paper:#f7f7f5;--surface:#fff;--gold:#c8a24a;--gold-soft:#f3ead4;--ok:#0b7a3b;--gap:#9b6b12;--none:#6b7280}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.5}
+  .wrap{max-width:1400px;margin:0 auto;padding:28px 20px 60px}
+  header{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px}
+  h1{font-size:26px;margin:0;letter-spacing:-.02em}
+  .sub{color:var(--muted);font-size:13px}
+  .aviso{margin:18px 0 22px;padding:12px 14px;border-left:3px solid var(--gold);background:var(--gold-soft);font-size:13px;border-radius:0 8px 8px 0}
+  .kpis{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+  .kpi{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 16px;min-width:110px}
+  .kpi b{display:block;font-size:22px;line-height:1.2}
+  .kpi span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+  .filtro{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+  input[type=search]{flex:1;max-width:380px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font:inherit;background:var(--surface)}
+  .legenda{font-size:12px;color:var(--muted)}
+  .tabela{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:auto}
+  table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+  th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+  thead th{position:sticky;top:0;background:#fbfaf8;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);z-index:2}
+  td.marca{font-weight:700}
+  td.qtd{text-align:center;font-weight:800}
+  td.est{color:#374151;font-size:13px}
+  td.gap{color:#9b6b12;font-weight:600}
+  td.preco{text-align:right}
+  td.cod{color:var(--muted);font-size:12px}
+  .tag{display:inline-block;padding:2px 8px;border-radius:99px;font-size:11px;font-weight:700;letter-spacing:.02em}
+  .st-ok{background:#e7f4ec;color:var(--ok)}
+  .st-gap{background:#fdf3df;color:var(--gap)}
+  .st-none{background:#f0f1f3;color:var(--none)}
+  tr:hover td{background:#fcfbf9}
+  .rodape{margin-top:18px;color:var(--muted);font-size:12px;max-width:900px}
+  @media (max-width:720px){.wrap{padding:18px 12px 40px}h1{font-size:21px}th,td{padding:7px 8px;font-size:13px}}
+  @media print{body{background:#fff}.filtro,.aviso{display:none}.tabela{overflow:visible;border:0}thead th{position:static}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Painel de estoque</h1>
+    <p class="sub">Catálogo + contagem de 13/11/2026 · uso interno</p>
+  </header>
+
+  <p class="aviso">Página de uso interno, fora do menu e do sitemap, marcada como <strong>noindex</strong>. Quem tiver este link consegue abrir — não divulgue fora da equipe.</p>
+
+  <section class="kpis">
+    <div class="kpi"><b>84</b><span>itens</span></div>
+    <div class="kpi"><b>45</b><span>com contagem</span></div>
+    <div class="kpi"><b>39</b><span>sem contagem</span></div>
+    <div class="kpi"><b>291</b><span>pares contados</span></div>
+    <div class="kpi"><b>3</b><span>fora do site</span></div>
+  </section>
+
+  <div class="filtro">
+    <input id="busca" type="search" placeholder="Filtrar por marca, modelo, cor ou tamanho" autocomplete="off">
+    <span class="legenda">Estoque no formato <strong>tamanho(unidades)</strong>. A coluna “Fora do anúncio” mostra numeração que existe na prateleira e não está publicada.</span>
+  </div>
+
+  <div class="tabela">
+    <table>
+      <thead>
+        <tr>
+          <th>Marca</th><th>Modelo</th><th>Cor</th><th>No site</th><th>Estoque</th><th>Pares</th><th>Fora do anúncio</th><th>Situação</th><th>Preço</th><th>Código</th>
+        </tr>
+      </thead>
+      <tbody id="linhas">
+<tr data-busca="a confirmar smash preto  34 35 36 39">
+      <td class="marca">A confirmar</td>
+      <td class="modelo">Smash</td>
+      <td class="cor">Preto</td>
+      <td>—</td>
+      <td class="est">34(1) 35(2) 36(1) 39(1)</td>
+      <td class="qtd">5</td>
+      <td class="gap">34, 35, 36, 39</td>
+      <td><span class="tag st-gap">Fora do anúncio</span></td>
+      <td class="preco">—</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="addan mocassin branco 39 ">
+      <td class="marca">Addan</td>
+      <td class="modelo">Mocassin</td>
+      <td class="cor">Branco</td>
+      <td>39</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 99,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="adidas 4run branco 34 35 36 34 35 36">
+      <td class="marca">Adidas</td>
+      <td class="modelo">4Run</td>
+      <td class="cor">Branco</td>
+      <td>34, 35, 36</td>
+      <td class="est">34(1) 35(1) 36(2)</td>
+      <td class="qtd">4</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 199,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="adidas add01 branco 40 42 40 42">
+      <td class="marca">Adidas</td>
+      <td class="modelo">ADD01</td>
+      <td class="cor">Branco</td>
+      <td>40, 42</td>
+      <td class="est">40(2) 42(2)</td>
+      <td class="qtd">4</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 139,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="adidas adwhite branco e ouro light 34 37 34 37">
+      <td class="marca">Adidas</td>
+      <td class="modelo">Adwhite</td>
+      <td class="cor">Branco e Ouro Light</td>
+      <td>34, 37</td>
+      <td class="est">34(1) 37(1)</td>
+      <td class="qtd">2</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 139,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="adidas campus 00s nude e branco 35 36 37 38 35 36 37 38">
+      <td class="marca">Adidas</td>
+      <td class="modelo">Campus 00s</td>
+      <td class="cor">Nude e Branco</td>
+      <td>35, 36, 37, 38</td>
+      <td class="est">35(2) 36(2) 37(2) 38(2)</td>
+      <td class="qtd">8</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 149,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="adidas futurecraft 4d preto 38 39 40 41 38 39 40 41">
+      <td class="marca">Adidas</td>
+      <td class="modelo">Futurecraft 4D</td>
+      <td class="cor">Preto</td>
+      <td>38, 39, 40, 41</td>
+      <td class="est">38(2) 39(2) 40(2) 41(3)</td>
+      <td class="qtd">9</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 99,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="adidas futurecraft 4d rosa 35 37 35 36 37">
+      <td class="marca">Adidas</td>
+      <td class="modelo">Futurecraft 4D</td>
+      <td class="cor">Rosa</td>
+      <td>35, 37</td>
+      <td class="est">35(1) 36(1) 37(2)</td>
+      <td class="qtd">4</td>
+      <td class="gap">36</td>
+      <td><span class="tag st-gap">Fora do anúncio</span></td>
+      <td class="preco">R$ 99,90</td>
+      <td class="cod">m20327 / 887383688052</td>
+    </tr>
+<tr data-busca="adidas kids preto e branco 27 28 29 30 31 32 33 27 28 29 30 31 32 33">
+      <td class="marca">Adidas</td>
+      <td class="modelo">Kids</td>
+      <td class="cor">Preto e Branco</td>
+      <td>27, 28, 29, 30, 31, 32, 33</td>
+      <td class="est">27(1) 28(1) 29(1) 30(1) 31(2) 32(1) 33(1)</td>
+      <td class="qtd">8</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 104,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="adidas samba branco e azul 36 ">
+      <td class="marca">Adidas</td>
+      <td class="modelo">Samba</td>
+      <td class="cor">Branco e Azul</td>
+      <td>36</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 149,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="adidas samba cinza e preto 34 35 37 34 35 37">
+      <td class="marca">Adidas</td>
+      <td class="modelo">Samba</td>
+      <td class="cor">Cinza e Preto</td>
+      <td>34, 35, 37</td>
+      <td class="est">34(2) 35(3) 37(3)</td>
+      <td class="qtd">8</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 139,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="adidas slipon preto 34 35 36 37 34 35 36">
+      <td class="marca">Adidas</td>
+      <td class="modelo">Slipon</td>
+      <td class="cor">Preto</td>
+      <td>34, 35, 36, 37</td>
+      <td class="est">34(1) 35(3) 36(2)</td>
+      <td class="qtd">6</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 114,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="adidas superstar branco 34 35 36 37 39 ">
+      <td class="marca">Adidas</td>
+      <td class="modelo">Superstar</td>
+      <td class="cor">Branco</td>
+      <td>34, 35, 36, 37, 39</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 149,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="arezzo casual branco e onça 39 ">
+      <td class="marca">Arezzo</td>
+      <td class="modelo">Casual</td>
+      <td class="cor">Branco e Onça</td>
+      <td>39</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 99,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="boots botas meias preto 35 ">
+      <td class="marca">Boots</td>
+      <td class="modelo">Botas Meias</td>
+      <td class="cor">Preto</td>
+      <td>35</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 99,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="boots botas zíper preta 34 36 ">
+      <td class="marca">Boots</td>
+      <td class="modelo">Botas Zíper</td>
+      <td class="cor">Preta</td>
+      <td>34, 36</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 99,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="boots coturno pelúcia preto 34 36 34 36">
+      <td class="marca">Boots</td>
+      <td class="modelo">Coturno Pelúcia</td>
+      <td class="cor">Preto</td>
+      <td>34, 36</td>
+      <td class="est">34(1) 36(2)</td>
+      <td class="qtd">3</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 99,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="coca-cola chinelo preto 33 34 ">
+      <td class="marca">Coca-Cola</td>
+      <td class="modelo">Chinelo</td>
+      <td class="cor">Preto</td>
+      <td>33, 34</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 19,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="coca-cola chinelo rosa 33 34 35 36 ">
+      <td class="marca">Coca-Cola</td>
+      <td class="modelo">Chinelo</td>
+      <td class="cor">Rosa</td>
+      <td>33, 34, 35, 36</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 19,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="coca-cola chinelo roxo 33 34 ">
+      <td class="marca">Coca-Cola</td>
+      <td class="modelo">Chinelo</td>
+      <td class="cor">Roxo</td>
+      <td>33, 34</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 24,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="colcci bolsa rosa  ">
+      <td class="marca">Colcci</td>
+      <td class="modelo">Bolsa</td>
+      <td class="cor">Rosa</td>
+      <td>—</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 59,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="converse all star branco 36 ">
+      <td class="marca">Converse</td>
+      <td class="modelo">All Star</td>
+      <td class="cor">Branco</td>
+      <td>36</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 109,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="converse all star branco 37 37">
+      <td class="marca">Converse</td>
+      <td class="modelo">All Star</td>
+      <td class="cor">Branco</td>
+      <td>37</td>
+      <td class="est">37(2)</td>
+      <td class="qtd">2</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 109,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="converse all star caramelo 35 37 35 37">
+      <td class="marca">Converse</td>
+      <td class="modelo">All Star</td>
+      <td class="cor">Caramelo</td>
+      <td>35, 37</td>
+      <td class="est">35(2) 37(2)</td>
+      <td class="qtd">4</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 109,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="converse all star danoninho 35 36 37 38 35 36 37 38">
+      <td class="marca">Converse</td>
+      <td class="modelo">All Star</td>
+      <td class="cor">Danoninho</td>
+      <td>35, 36, 37, 38</td>
+      <td class="est">35(2) 36(1) 37(3) 38(2)</td>
+      <td class="qtd">8</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 109,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="converse all star nozes 34 35 39 ">
+      <td class="marca">Converse</td>
+      <td class="modelo">All Star</td>
+      <td class="cor">Nozes</td>
+      <td>34, 35, 39</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 109,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="converse all star preto 36 37 38 39 41 42 36 37 38 39 41 42">
+      <td class="marca">Converse</td>
+      <td class="modelo">All Star</td>
+      <td class="cor">Preto</td>
+      <td>36, 37, 38, 39, 41, 42</td>
+      <td class="est">36(2) 37(2) 38(2) 39(2) 41(2) 42(2)</td>
+      <td class="qtd">12</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 99,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="d'matias slipon preto 36 ">
+      <td class="marca">D'Matias</td>
+      <td class="modelo">Slipon</td>
+      <td class="cor">Preto</td>
+      <td>36</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 79,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="fila running rosa 34 ">
+      <td class="marca">Fila</td>
+      <td class="modelo">Running</td>
+      <td class="cor">Rosa</td>
+      <td>34</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 99,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="futurewear tad4 champagne e off-white 35 36 37 38 ">
+      <td class="marca">Futurewear</td>
+      <td class="modelo">TAD4</td>
+      <td class="cor">Champagne e Off-white</td>
+      <td>35, 36, 37, 38</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 149,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="ipanema chinelo preto 41 42 ">
+      <td class="marca">Ipanema</td>
+      <td class="modelo">Chinelo</td>
+      <td class="cor">Preto</td>
+      <td>41, 42</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 29,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="lacoste noruega branco 39 40 42 43 39 40 41 42 43">
+      <td class="marca">Lacoste</td>
+      <td class="modelo">Noruega</td>
+      <td class="cor">Branco</td>
+      <td>39, 40, 42, 43</td>
+      <td class="est">39(1) 40(3) 41(1) 42(3) 43(2)</td>
+      <td class="qtd">10</td>
+      <td class="gap">41</td>
+      <td><span class="tag st-gap">Fora do anúncio</span></td>
+      <td class="preco">R$ 129,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="lacoste social preto 40 40">
+      <td class="marca">Lacoste</td>
+      <td class="modelo">Social</td>
+      <td class="cor">Preto</td>
+      <td>40</td>
+      <td class="est">40(2)</td>
+      <td class="qtd">2</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 99,90</td>
+      <td class="cod">09lc</td>
+    </tr>
+<tr data-busca="new balance casual branco 36 37 ">
+      <td class="marca">New Balance</td>
+      <td class="modelo">Casual</td>
+      <td class="cor">Branco</td>
+      <td>36, 37</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 149,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="nike 7001 ink preto 42 ">
+      <td class="marca">Nike</td>
+      <td class="modelo">7001 Ink</td>
+      <td class="cor">Preto</td>
+      <td>42</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 199,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="nike 7099 kill branco 35 37 38 39 40 35 37 38 39 40">
+      <td class="marca">Nike</td>
+      <td class="modelo">7099 Kill</td>
+      <td class="cor">Branco</td>
+      <td>35, 37, 38, 39, 40</td>
+      <td class="est">35(2) 37(2) 38(2) 39(2) 40(2)</td>
+      <td class="qtd">10</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 139,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="nike 7099 kill creme e nude 37 38 37 38">
+      <td class="marca">Nike</td>
+      <td class="modelo">7099 Kill</td>
+      <td class="cor">Creme e Nude</td>
+      <td>37, 38</td>
+      <td class="est">37(3) 38(2)</td>
+      <td class="qtd">5</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 139,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="nike air force branco 34 35 36 37 38 39 42 34 35 36 37 38 39 42 43">
+      <td class="marca">Nike</td>
+      <td class="modelo">Air Force</td>
+      <td class="cor">Branco</td>
+      <td>34, 35, 36, 37, 38, 39, 42</td>
+      <td class="est">34(3) 35(3) 36(5) 37(4) 38(3) 39(1) 42(2) 43(1)</td>
+      <td class="qtd">22</td>
+      <td class="gap">43</td>
+      <td><span class="tag st-gap">Fora do anúncio</span></td>
+      <td class="preco">R$ 139,90</td>
+      <td class="cod">63409 / nk340010af / 023233074521</td>
+    </tr>
+<tr data-busca="nike air force branco e holográfico 37 37">
+      <td class="marca">Nike</td>
+      <td class="modelo">Air Force</td>
+      <td class="cor">Branco e Holográfico</td>
+      <td>37</td>
+      <td class="est">37(2)</td>
+      <td class="qtd">2</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 149,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="nike air force caramelo 40 41 43 40 41 43">
+      <td class="marca">Nike</td>
+      <td class="modelo">Air Force</td>
+      <td class="cor">Caramelo</td>
+      <td>40, 41, 43</td>
+      <td class="est">40(1) 41(2) 43(1)</td>
+      <td class="qtd">4</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 199,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="nike air force jeans e branco 34 ">
+      <td class="marca">Nike</td>
+      <td class="modelo">Air Force</td>
+      <td class="cor">Jeans e Branco</td>
+      <td>34</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 149,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="nike air force jeans, preto e branco 37 38 35 37 38">
+      <td class="marca">Nike</td>
+      <td class="modelo">Air Force</td>
+      <td class="cor">Jeans, Preto e Branco</td>
+      <td>37, 38</td>
+      <td class="est">35(1) 37(2) 38(1)</td>
+      <td class="qtd">4</td>
+      <td class="gap">35</td>
+      <td><span class="tag st-gap">Fora do anúncio</span></td>
+      <td class="preco">R$ 139,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="nike air force jeans, rose e branco 35 36 37 39 35 36 37 39">
+      <td class="marca">Nike</td>
+      <td class="modelo">Air Force</td>
+      <td class="cor">Jeans, Rose e Branco</td>
+      <td>35, 36, 37, 39</td>
+      <td class="est">35(2) 36(2) 37(2) 39(2)</td>
+      <td class="qtd">8</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 139,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="nike air force nude, branco e dourado 37 37">
+      <td class="marca">Nike</td>
+      <td class="modelo">Air Force</td>
+      <td class="cor">Nude, Branco e Dourado</td>
+      <td>37</td>
+      <td class="est">37(2)</td>
+      <td class="qtd">2</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 149,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="nike air force preto 35 36 37 38 39 42 43 35 36 39 42 43">
+      <td class="marca">Nike</td>
+      <td class="modelo">Air Force</td>
+      <td class="cor">Preto</td>
+      <td>35, 36, 37, 38, 39, 42, 43</td>
+      <td class="est">35(2) 36(3) 39(6) 42(2) 43(3)</td>
+      <td class="qtd">16</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 139,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="nike dunk low branco 34 ">
+      <td class="marca">Nike</td>
+      <td class="modelo">Dunk Low</td>
+      <td class="cor">Branco</td>
+      <td>34</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 149,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="nike dunk low cinza, hidra e laminate 36 37 ">
+      <td class="marca">Nike</td>
+      <td class="modelo">Dunk Low</td>
+      <td class="cor">Cinza, Hidra e Laminate</td>
+      <td>36, 37</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 149,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="nike dunk low dourado 35 ">
+      <td class="marca">Nike</td>
+      <td class="modelo">Dunk Low</td>
+      <td class="cor">Dourado</td>
+      <td>35</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 149,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="nike dunk low palha 36 ">
+      <td class="marca">Nike</td>
+      <td class="modelo">Dunk Low</td>
+      <td class="cor">Palha</td>
+      <td>36</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 149,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="nike kids air force cinza 27 28 30 32 33 ">
+      <td class="marca">Nike</td>
+      <td class="modelo">Kids Air Force</td>
+      <td class="cor">Cinza</td>
+      <td>27, 28, 30, 32, 33</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 109,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="nike kids air force preto 28 29 30 31 32 28 29 30 31 32">
+      <td class="marca">Nike</td>
+      <td class="modelo">Kids Air Force</td>
+      <td class="cor">Preto</td>
+      <td>28, 29, 30, 31, 32</td>
+      <td class="est">28(1) 29(1) 30(2) 31(1) 32(2)</td>
+      <td class="qtd">7</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 109,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="nike kids air force rosa 26 27 29 32 33 26 27 29 32 33">
+      <td class="marca">Nike</td>
+      <td class="modelo">Kids Air Force</td>
+      <td class="cor">Rosa</td>
+      <td>26, 27, 29, 32, 33</td>
+      <td class="est">26(1) 27(1) 29(1) 32(1) 33(2)</td>
+      <td class="qtd">6</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 109,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="nike kids branco  26 27 28 31 32">
+      <td class="marca">Nike</td>
+      <td class="modelo">Kids</td>
+      <td class="cor">Branco</td>
+      <td>—</td>
+      <td class="est">26(1) 27(1) 28(1) 31(1) 32(2)</td>
+      <td class="qtd">6</td>
+      <td class="gap">26, 27, 28, 31, 32</td>
+      <td><span class="tag st-gap">Fora do anúncio</span></td>
+      <td class="preco">—</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="nike x4 zoom marinho e rosa 36 39 ">
+      <td class="marca">Nike</td>
+      <td class="modelo">X4 Zoom</td>
+      <td class="cor">Marinho e Rosa</td>
+      <td>36, 39</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 99,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="nike x4 zoom preto e rosa 36 ">
+      <td class="marca">Nike</td>
+      <td class="modelo">X4 Zoom</td>
+      <td class="cor">Preto e Rosa</td>
+      <td>36</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 99,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="puma casual branco 35 36 35 36">
+      <td class="marca">Puma</td>
+      <td class="modelo">Casual</td>
+      <td class="cor">Branco</td>
+      <td>35, 36</td>
+      <td class="est">35(2) 36(2)</td>
+      <td class="qtd">4</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 119,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="puma casual rose 36 ">
+      <td class="marca">Puma</td>
+      <td class="modelo">Casual</td>
+      <td class="cor">Rose</td>
+      <td>36</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 119,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="redley shoe preto 35 36 39 ">
+      <td class="marca">Redley</td>
+      <td class="modelo">Shoe</td>
+      <td class="cor">Preto</td>
+      <td>35, 36, 39</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 99,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="reserva slipon preto 41 42 41 42">
+      <td class="marca">Reserva</td>
+      <td class="modelo">Slipon</td>
+      <td class="cor">Preto</td>
+      <td>41, 42</td>
+      <td class="est">41(1) 42(2)</td>
+      <td class="qtd">3</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 99,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="running slipon rosa 35 37 39 35 37 39">
+      <td class="marca">Running</td>
+      <td class="modelo">Slipon</td>
+      <td class="cor">Rosa</td>
+      <td>35, 37, 39</td>
+      <td class="est">35(1) 37(2) 39(1)</td>
+      <td class="qtd">4</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 64,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="santa lolla slipon  34 36 37 38 39 34 36 37">
+      <td class="marca">Santa Lolla</td>
+      <td class="modelo">Slipon</td>
+      <td class="cor">—</td>
+      <td>34, 36, 37, 38, 39</td>
+      <td class="est">34(1) 36(1) 37(1)</td>
+      <td class="qtd">3</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 89,90</td>
+      <td class="cod">1704231749</td>
+    </tr>
+<tr data-busca="santa lolla slipon azul e bb 34 35 ">
+      <td class="marca">Santa Lolla</td>
+      <td class="modelo">Slipon</td>
+      <td class="cor">Azul e BB</td>
+      <td>34, 35</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 79,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="santa lolla slipon palha 34 ">
+      <td class="marca">Santa Lolla</td>
+      <td class="modelo">Slipon</td>
+      <td class="cor">Palha</td>
+      <td>34</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 79,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="santa lolla slipon preto 37 38 39 34 36 37 39">
+      <td class="marca">Santa Lolla</td>
+      <td class="modelo">Slipon</td>
+      <td class="cor">Preto</td>
+      <td>37, 38, 39</td>
+      <td class="est">34(1) 36(2) 37(2) 39(1)</td>
+      <td class="qtd">6</td>
+      <td class="gap">34, 36</td>
+      <td><span class="tag st-gap">Fora do anúncio</span></td>
+      <td class="preco">R$ 79,90</td>
+      <td class="cod">SL1002</td>
+    </tr>
+<tr data-busca="soultz sophya off-white 34 ">
+      <td class="marca">Soultz</td>
+      <td class="modelo">Sophya</td>
+      <td class="cor">Off-white</td>
+      <td>34</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 49,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="vans 1144 vs preto 35 36 37 35 36 37">
+      <td class="marca">Vans</td>
+      <td class="modelo">1144 VS</td>
+      <td class="cor">Preto</td>
+      <td>35, 36, 37</td>
+      <td class="est">35(2) 36(1) 37(1)</td>
+      <td class="qtd">4</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 109,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="vans kids preto e branco 26 28 29 30 31 33 ">
+      <td class="marca">Vans</td>
+      <td class="modelo">Kids</td>
+      <td class="cor">Preto e Branco</td>
+      <td>26, 28, 29, 30, 31, 33</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 109,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="vans old skool 1300 kni  35 36 35 36">
+      <td class="marca">Vans</td>
+      <td class="modelo">Old Skool 1300 KNI</td>
+      <td class="cor">—</td>
+      <td>35, 36</td>
+      <td class="est">35(1) 36(2)</td>
+      <td class="qtd">3</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 149,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="vans old skool azul 37 43 ">
+      <td class="marca">Vans</td>
+      <td class="modelo">Old Skool</td>
+      <td class="cor">Azul</td>
+      <td>37, 43</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 129,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="vans old skool nude 34 35 36 37 34 35 36 37">
+      <td class="marca">Vans</td>
+      <td class="modelo">Old Skool</td>
+      <td class="cor">Nude</td>
+      <td>34, 35, 36, 37</td>
+      <td class="est">34(1) 35(2) 36(2) 37(2)</td>
+      <td class="qtd">7</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 129,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="vans old skool preto 35 37 39 41 35 37 39 41">
+      <td class="marca">Vans</td>
+      <td class="modelo">Old Skool</td>
+      <td class="cor">Preto</td>
+      <td>35, 37, 39, 41</td>
+      <td class="est">35(2) 37(2) 39(2) 41(1)</td>
+      <td class="qtd">7</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 129,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="vans old skool preto e branco 34 35 36 38 41 42 ">
+      <td class="marca">Vans</td>
+      <td class="modelo">Old Skool</td>
+      <td class="cor">Preto e Branco</td>
+      <td>34, 35, 36, 38, 41, 42</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 139,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="vans old skool tabaco 35 36 40 41 35 36 40 42">
+      <td class="marca">Vans</td>
+      <td class="modelo">Old Skool</td>
+      <td class="cor">Tabaco</td>
+      <td>35, 36, 40, 41</td>
+      <td class="est">35(2) 36(2) 40(1) 42(1)</td>
+      <td class="qtd">6</td>
+      <td class="gap">42</td>
+      <td><span class="tag st-gap">Fora do anúncio</span></td>
+      <td class="preco">R$ 129,90</td>
+      <td class="cod">t84817n36s5</td>
+    </tr>
+<tr data-busca="vans preto 1100 preto  34 35 36 38 40 41 42">
+      <td class="marca">Vans</td>
+      <td class="modelo">Preto 1100</td>
+      <td class="cor">Preto</td>
+      <td>—</td>
+      <td class="est">34(2) 35(2) 36(2) 38(2) 40(2) 41(2) 42(2)</td>
+      <td class="qtd">14</td>
+      <td class="gap">34, 35, 36, 38, 40, 41, 42</td>
+      <td><span class="tag st-gap">Fora do anúncio</span></td>
+      <td class="preco">—</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="vans ultrarange marinho e branco 35 36 37 38 39 35 36 37 38 39">
+      <td class="marca">Vans</td>
+      <td class="modelo">UltraRange</td>
+      <td class="cor">Marinho e Branco</td>
+      <td>35, 36, 37, 38, 39</td>
+      <td class="est">35(2) 36(4) 37(4) 38(1) 39(1)</td>
+      <td class="qtd">12</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 99,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="vans ultrarange preto 38 41 38 41">
+      <td class="marca">Vans</td>
+      <td class="modelo">UltraRange</td>
+      <td class="cor">Preto</td>
+      <td>38, 41</td>
+      <td class="est">38(1) 41(6)</td>
+      <td class="qtd">7</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 99,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="veja 8002 voi  35 36 37 38 39 40 35 36 37 38 39 40">
+      <td class="marca">Veja</td>
+      <td class="modelo">8002 Voi</td>
+      <td class="cor">—</td>
+      <td>35, 36, 37, 38, 39, 40</td>
+      <td class="est">35(1) 36(2) 37(1) 38(2) 39(1) 40(1)</td>
+      <td class="qtd">8</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 139,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="veja casual preto e branco 35 37 39 ">
+      <td class="marca">Veja</td>
+      <td class="modelo">Casual</td>
+      <td class="cor">Preto e Branco</td>
+      <td>35, 37, 39</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 149,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="veja v023 branco e preto 35 36 37 ">
+      <td class="marca">Veja</td>
+      <td class="modelo">V023</td>
+      <td class="cor">Branco e Preto</td>
+      <td>35, 36, 37</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 129,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="veja v023 off-white e jeans denim 34 36 39 34 36 39">
+      <td class="marca">Veja</td>
+      <td class="modelo">V023</td>
+      <td class="cor">Off-white e Jeans Denim</td>
+      <td>34, 36, 39</td>
+      <td class="est">34(1) 36(2) 39(1)</td>
+      <td class="qtd">4</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 129,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="veja x180-10 camurça dulce e off-white 35 36 39 ">
+      <td class="marca">Veja</td>
+      <td class="modelo">X180-10</td>
+      <td class="cor">Camurça Dulce e Off-white</td>
+      <td>35, 36, 39</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 149,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="walking papete nude 38 ">
+      <td class="marca">Walking</td>
+      <td class="modelo">Papete</td>
+      <td class="cor">Nude</td>
+      <td>38</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 79,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="walking rasteirinha arco-íris 34 37 ">
+      <td class="marca">Walking</td>
+      <td class="modelo">Rasteirinha</td>
+      <td class="cor">Arco-íris</td>
+      <td>34, 37</td>
+      <td class="est">—</td>
+      <td class="qtd">—</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-none">Sem contagem</span></td>
+      <td class="preco">R$ 49,90</td>
+      <td class="cod">—</td>
+    </tr>
+<tr data-busca="walking rasteirinha nude 34 35 36 37 38 39 34 35 36 37 38">
+      <td class="marca">Walking</td>
+      <td class="modelo">Rasteirinha</td>
+      <td class="cor">Nude</td>
+      <td>34, 35, 36, 37, 38, 39</td>
+      <td class="est">34(1) 35(2) 36(2) 37(2) 38(1)</td>
+      <td class="qtd">8</td>
+      <td class="gap">—</td>
+      <td><span class="tag st-ok">Conferido</span></td>
+      <td class="preco">R$ 79,90</td>
+      <td class="cod">—</td>
+    </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="rodape">“No site” é a grade publicada hoje no catálogo; “Estoque” é a contagem física. Divergência entre as duas colunas é trabalho de cadastro, não necessariamente falta de peça. Itens “sem contagem” ainda não passaram pela prateleira. Preços seguem o catálogo e podem mudar sem aviso.</p>
+</div>
+<script>
+  const busca = document.getElementById('busca');
+  const linhas = Array.from(document.querySelectorAll('#linhas tr'));
+  busca.addEventListener('input', () => {
+    const t = busca.value.trim().toLowerCase();
+    linhas.forEach(tr => { tr.hidden = t !== '' && !tr.dataset.busca.includes(t); });
+  });
+</script>
+</body>
+</html>

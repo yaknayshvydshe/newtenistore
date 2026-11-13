@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/privacy.html",
+      "destination": "/trocas-e-devolucoes.html",
+      "permanent": true
+    },
+    {
+      "source": "/privacy",
+      "destination": "/trocas-e-devolucoes.html",
+      "permanent": true
+    }
+  ]
+}
