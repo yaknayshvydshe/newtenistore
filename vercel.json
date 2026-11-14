@@ -2,38 +2,63 @@
   "redirects": [
     {
       "source": "/privacy.html",
-      "destination": "/app/pages/trocas-e-devolucoes.html",
+      "destination": "/pages/trocas-e-devolucoes.html",
       "permanent": true
     },
     {
       "source": "/privacy",
-      "destination": "/app/pages/trocas-e-devolucoes.html",
+      "destination": "/pages/trocas-e-devolucoes.html",
       "permanent": true
     },
     {
       "source": "/trocas-e-devolucoes.html",
-      "destination": "/app/pages/trocas-e-devolucoes.html",
+      "destination": "/pages/trocas-e-devolucoes.html",
       "permanent": true
     },
     {
       "source": "/trocas-e-devolucoes",
-      "destination": "/app/pages/trocas-e-devolucoes.html",
+      "destination": "/pages/trocas-e-devolucoes.html",
       "permanent": true
     },
     {
       "source": "/privacidade.html",
-      "destination": "/app/pages/privacidade.html",
+      "destination": "/pages/privacidade.html",
       "permanent": true
     },
     {
       "source": "/privacidade",
-      "destination": "/app/pages/privacidade.html",
+      "destination": "/pages/privacidade.html",
+      "permanent": true
+    },
+    {
+      "source": "/app/pages/trocas-e-devolucoes.html",
+      "destination": "/pages/trocas-e-devolucoes.html",
+      "permanent": true
+    },
+    {
+      "source": "/app/pages/trocas-e-devolucoes",
+      "destination": "/pages/trocas-e-devolucoes.html",
+      "permanent": true
+    },
+    {
+      "source": "/app/pages/privacidade.html",
+      "destination": "/pages/privacidade.html",
+      "permanent": true
+    },
+    {
+      "source": "/app/pages/privacidade",
+      "destination": "/pages/privacidade.html",
+      "permanent": true
+    },
+    {
+      "source": "/app/pages/5e79d8ad0c86fd79dfaa5bb2a3c21bf6aca7ce623dbece3ec8e93a15736ffba6.html",
+      "destination": "/pages/5e79d8ad0c86fd79dfaa5bb2a3c21bf6aca7ce623dbece3ec8e93a15736ffba6.html",
       "permanent": true
     }
   ],
   "headers": [
     {
-      "source": "/app/pages/5e79d8ad0c86fd79dfaa5bb2a3c21bf6aca7ce623dbece3ec8e93a15736ffba6.html",
+      "source": "/pages/5e79d8ad0c86fd79dfaa5bb2a3c21bf6aca7ce623dbece3ec8e93a15736ffba6.html",
       "headers": [
         {
           "key": "X-Robots-Tag",
