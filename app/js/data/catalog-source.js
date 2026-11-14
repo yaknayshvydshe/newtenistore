@@ -134,10 +134,54 @@
         nome: 'Bota Coturno Pelúcia'
       },
       "walking-rasteirinha-arco-iris-34-37-49'90": {
-        nome: 'Rasteirinha'
+        nome: 'Sandália',
+        modelo: 'Sandália'
       },
       "walking-rasteirinha-nude-34-35-36-37-38-39-79'90": {
-        nome: 'Sandália'
+        nome: 'Sandália',
+        modelo: 'Sandália'
+      },
+      "walking-papete-nude-38-79'90": {
+        nome: 'Papete'
+      },
+      "redley-shoe-preto-35-36-39-99'90": {
+        modelo: 'Sapatênis'
+      },
+      "soultz-sophya-offwhite-34-49'90": {
+        modelo: 'Sophya Sandália'
+      },
+      "adidas-kids-preto-branco-27-28-29-30-31-32-33-104'90": {
+        preco: 99.9
+      },
+      "nike-kids-air-force-cinza-27-28-30-32-33-109'90": {
+        preco: 99.9
+      },
+      "nike-kids-air-force-pink-26-27-29-32-33-109'90": {
+        preco: 99.9
+      },
+      "nike-kids-air-force-preto-28-29-30-31-32-109'90": {
+        preco: 99.9
+      },
+      "vans-kids-preto-branco-26-28-29-30-31-33-109'90": {
+        preco: 99.9
+      },
+      "adidas-slipon-preto-34-35-36-37-114'90": {
+        preco: 109.9
+      },
+      "cocacola-chinelo-purple-33-34-24'90": {
+        preco: 19.9
+      },
+      "santalolla-slipon-azul-bb-34-35-79'90": {
+        preco: 99.9
+      },
+      "santalolla-slipon-palha-34-79'90": {
+        preco: 99.9
+      },
+      "santalolla-slipon-preto-34-36-37-38-39-89'90": {
+        preco: 99.9
+      },
+      "santalolla-slipon-preto-37-38-79'90": {
+        preco: 99.9
       }
     },
 
