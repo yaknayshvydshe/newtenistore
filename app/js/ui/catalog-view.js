@@ -37,7 +37,7 @@
   const filtered = () =>
     state.products.filter((product) => {
       if (state.size && !product.tamanhos.includes(state.size)) return false;
-      return NTS.Product.matchesSearch(product.search, state.query);
+      return NTS.Search.matches(product, state.query);
     });
 
   const hasActiveFilters = () =>

@@ -141,12 +141,28 @@
       }
     },
 
+    categoriasPorArquivo: {
+      "addan-mocassin-branco-39-99'90.webp": 'mocassim',
+      "boots-botas-meias-preto-35-99'90.webp": 'bota',
+      "boots-botas-ziper-preta-34-36-99'90.webp": 'bota',
+      "boots-coturno-pelucia-preto-34-36-99'90.webp": 'bota',
+      "cocacola-chinelo-pink-33-34-35-36-19'90.webp": 'chinelo',
+      "cocacola-chinelo-preto-33-34-19'90.webp": 'chinelo',
+      "cocacola-chinelo-purple-33-34-24'90.webp": 'chinelo',
+      "ipanema-chinelo-preto-41-42-29'90.webp": 'chinelo',
+      "walking-papete-nude-38-79'90.webp": 'sandalia',
+      "walking-rasteirinha-arco-iris-34-37-49'90.webp": 'sandalia',
+      "walking-rasteirinha-nude-34-35-36-37-38-39-79'90.webp": 'sandalia',
+      "soultz-sophya-offwhite-34-49'90.webp": 'sandalia',
+      "colcci-bolsa-rosa-59'90.webp": 'bolsa'
+    },
+
     featured: [
       "running-slipon-pink-35-37-39-64'90.webp",
       "vans-ultrarange-marinho-branco-35-36-37-38-39-99'90.webp",
-      "converse-allstar-preto-36-37-38-39-41-42-109'90.webp",
-      "nike-air-force-branco-34-35-36-37-38-39-42-139'90.webp",
-      "veja-8002voi-35-36-37-38-39-40-139'90.webp"
+      "nike-air-force-branco-34-35-36-37-38-39-42-43-139'90.webp",
+      "veja-8002voi-35-36-37-38-39-40-139'90.webp",
+      "newbalance-casual-branco-36-37-149'90.webp"
     ]
   };
 })();

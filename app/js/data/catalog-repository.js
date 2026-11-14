@@ -18,7 +18,10 @@
       if (!file || seen.has(file)) continue;
       seen.add(file);
       const product = NTS.Product.parse(file, source, config);
-      if (product) products.push(product);
+      if (product) {
+        NTS.Search.index(product);
+        products.push(product);
+      }
     }
   }
 
